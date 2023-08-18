@@ -33,7 +33,12 @@ class Program
 
         Console.Write("Quanto é 5 + 5?\nEscreva sua resposta abaixo: ");
         int resp_1 = Convert.ToInt32(Console.ReadLine());
-        if (resp_1 != 10)
+        if (resp_1 == 10)
+        {
+            pontuacao++;
+            acertos++;
+        }
+        else
         {
             Console.WriteLine("Você errou a primeira pergunta. Fim do jogo.");
             Environment.Exit(0);
