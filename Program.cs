@@ -5,19 +5,25 @@ class Program
     static void Main(string[] args)
     {
         int pontuacao = 0;
+        int acertos = 0;
+        int erros = 0;
 
         void VerificarResposta(string respostaCorreta, string respostaUsuario)
         {
             if (string.Equals(respostaUsuario, respostaCorreta, StringComparison.OrdinalIgnoreCase))
             {
                 pontuacao++;
+                acertos++;
             }
             else
             {
                 Console.WriteLine("Ops, você errou! A resposta correta é: " + respostaCorreta);
-                if (pontuacao > 0)
+                pontuacao--;
+                erros++;
+                if (pontuacao < 0)
                 {
-                    pontuacao--;
+                    Console.WriteLine("Sua pontuação é menor que zero. Fim do jogo.");
+                    Environment.Exit(0);
                 }
             }
         }
@@ -27,7 +33,11 @@ class Program
 
         Console.Write("Quanto é 5 + 5?\nEscreva sua resposta abaixo: ");
         int resp_1 = Convert.ToInt32(Console.ReadLine());
-        VerificarResposta("10", resp_1.ToString());
+        if (resp_1 != 10)
+        {
+            Console.WriteLine("Você errou a primeira pergunta. Fim do jogo.");
+            Environment.Exit(0);
+        }
 
         Console.WriteLine("Sua pontuação é: " + pontuacao);
         Console.Write("Quanto é 7 x 9?\nEscreva sua resposta abaixo: ");
@@ -44,6 +54,9 @@ class Program
         string resp_4 = Console.ReadLine();
         VerificarResposta("Super Mario Bros", resp_4);
 
-        Console.WriteLine("Sua pontuação final é: " + pontuacao);
+        Console.WriteLine("Parabéns! Você completou o jogo!");
+        Console.WriteLine("Pontuação final: " + pontuacao);
+        Console.WriteLine("Acertos: " + acertos);
+        Console.WriteLine("Erros: " + erros);
     }
 }
